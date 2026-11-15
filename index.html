@@ -1,0 +1,154 @@
+<meta charset="UTF-8">
+<style>
+    body{
+        background-color: black;
+        text-align: center;
+    }
+    h1{
+        color: #30bdf8;
+        text-shadow: 0 0 10px;
+    }
+    h2{
+        color: #ff007c;
+        text-shadow: 0 0 10px;
+    }
+    img{
+        border-radius: 30%;
+        border: 4px solid white;
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        box-shadow: 0 0 30px #30bdf8;
+    }
+    a{
+        text-decoration: none;
+    }
+    @keyframes leftRightMove{
+        0% {transform: translate(20px);}
+        100%{transform: translate(-20px);}
+    }
+    a h1{
+        animation: leftRightMove 1.5s ease-in-out infinite alternate;
+        text-shadow: 0 0 20px #30bdf8,0 0 40px #30bdf8;
+    }
+    .fake-alert{
+        background-color: black;
+        color: red;
+        position: fixed;
+        left:50%;
+        top:50%;
+        border: 2px solid red;
+        box-shadow: 0 0 25px red;
+        padding:10px 20px;
+        font-weight:bold;
+        border-radius: 5px;
+        transform: scale(0.1);
+        opacity: 0;
+            transition: all 0.5s;
+    }
+</style>
+
+<style>
+    .matrix-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -999;
+        background-color: #000;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .matrix-col {
+        position: absolute;
+        top: -100%;
+        color: #0f0;
+        font-family: monospace;
+        font-size: 16px;
+        line-height: 1.3;
+        white-space: pre;
+        animation: matrixRoll linear infinite;
+    }
+    @keyframes matrixRoll {
+            0% {transform: translateY(0);}
+            100% {transform: translateY(200vh);}
+    }
+</style>
+
+<div class="matrix-bg" id="matrixBg"></div>
+
+<h1>你好，欢迎来到我的个人主页！</h1>
+<h2>我们一起coding吧！</h2>
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEXc7BqW2OiExpMn6jkQmfj5JuNB2aoBgAC_xwAAisD4FadAwKcB70LGD0E.jpeg" alt="BQACAgUAAyEGAASHRsPbAAEXc7BqW2OiExpMn6jkQmfj5JuNB2aoBgAC_xwAAisD4FadAwKcB70LGD0E.jpeg" onclick="a()">
+
+<a href="http://codinghou.cn">
+        <h1>
+            🔥点击传送：进入侯网🔥
+        </h1>
+</a>
+<a href="https://www.ccw.site">
+    <h1>
+        ✌️进入共创世界
+    </h1>
+</a>
+<a href="https://www.turbowarp.org">
+    <h1>
+        🐼进入turbowarp
+    </h1>
+</a>
+<a href="https://www.bilibili.com">
+    <h1>
+        😁进入B站
+    </h1>
+</a>
+<script>
+    function a(){
+        var n = 300;
+        for(var i=1;i<=n;i++){
+            //     alert('出现了一个错误，请删除Windows。这是第'+i+'次警告！');
+        
+        
+        
+            setTimeout(() => {
+                let box = document.createElement("div");
+                box.innerText = "😭出现了一个错误，请删除Windows😭"
+                document.body.appendChild(box);
+                box.className="fake-alert";
+
+                box.offsetHeight;
+
+                box.style.left = (Math.random() * 100) + "%";
+                box.style.top = (Math.random() * 100) + "%";
+                box.style.opacity = "1";
+                box.style.transform = `scale(${Math.random() + 0.5}) rotate(${Math.random() * 60 - 30}deg)`;
+            },i*20);
+        }
+    }
+</script>
+
+<script>
+    const bg = document.getElementById('matrixBg');
+    function createLine() {
+        const col = document.createElement('div');
+        col.className = 'matrix-col';
+        col.style.left = Math.random() * 100 + '%';
+        const speed = 7 + Math.random() * 14;
+        col.style.animationDuration = speed + 's';
+        let str = '';
+        const len = Math.floor(window.innerHeight / 18);
+        for(let i = 0; i < len; i++) {
+            str += Math.round(Math.random()) + '\n';
+        }
+        col.innerText = str;
+        bg.appendChild(col);
+        setTimeout(() => {
+            col.remove();
+            createLine();
+        }, speed * 1000);
+    }
+    function initMatrix() {
+        bg.innerHTML = '';
+        const count = Math.floor(window.innerWidth / 20);
+        for(let i = 0; i < count; i++) createLine();
+    }
+    initMatrix();
+    window.onresize = initMatrix;
+</script>
